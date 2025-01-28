@@ -1,5 +1,6 @@
 package com.mindex.challenge.service.impl;
 
+import com.mindex.challenge.data.ReportingStructure;
 import com.mindex.challenge.data.Employee;
 import com.mindex.challenge.service.EmployeeService;
 import org.junit.Before;
@@ -24,6 +25,7 @@ public class EmployeeServiceImplTest {
 
     private String employeeUrl;
     private String employeeIdUrl;
+    private String reportingStructureUrl;
 
     @Autowired
     private EmployeeService employeeService;
@@ -38,6 +40,7 @@ public class EmployeeServiceImplTest {
     public void setup() {
         employeeUrl = "http://localhost:" + port + "/employee";
         employeeIdUrl = "http://localhost:" + port + "/employee/{id}";
+        reportingStructureUrl = "http://localhost:" + port + "/employee/{id}/reporting-structure";
     }
 
     @Test
@@ -76,6 +79,42 @@ public class EmployeeServiceImplTest {
 
         assertEmployeeEquivalence(readEmployee, updatedEmployee);
     }
+    @Test
+    public void testReportingStructure() {
+        // Create a single employee with no direct reports
+        Employee manager = new Employee();
+        manager.setFirstName("Alice");
+        manager.setLastName("Johnson");
+        manager.setDepartment("HR");
+        manager.setPosition("Manager");
+
+        // Create the employee
+        Employee createdManager = restTemplate.postForEntity(employeeUrl, manager, Employee.class).getBody();
+
+        assertNotNull(createdManager);
+        assertNotNull(createdManager.getEmployeeId());
+
+        // Fetch the created employee to check persistence
+        Employee fetchedManager = restTemplate.getForEntity(employeeIdUrl, Employee.class, createdManager.getEmployeeId()).getBody();
+        assertNotNull(fetchedManager);
+        assertEquals(createdManager.getEmployeeId(), fetchedManager.getEmployeeId());
+
+        // Call reporting structure endpoint
+        ReportingStructure reportingStructure = restTemplate.getForEntity(
+                reportingStructureUrl,
+                ReportingStructure.class,
+                createdManager.getEmployeeId()).getBody();
+
+        // Validate response
+        assertNotNull(reportingStructure);
+        assertNotNull(reportingStructure.getEmployee());
+        assertEquals(createdManager.getEmployeeId(), reportingStructure.getEmployee().getEmployeeId());
+
+        // Since there are no direct reports, numberOfReports should be 0
+        assertEquals(0, reportingStructure.getNumberOfReports());
+    }
+
+
 
     private static void assertEmployeeEquivalence(Employee expected, Employee actual) {
         assertEquals(expected.getFirstName(), actual.getFirstName());
