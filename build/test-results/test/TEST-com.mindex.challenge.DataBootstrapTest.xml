@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.mindex.challenge.DataBootstrapTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-01-28T17:42:01" hostname="Wills-MacBook-Pro-96.local" time="0.046">
+<testsuite name="com.mindex.challenge.DataBootstrapTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-01-28T22:22:02" hostname="Wills-MBP-96.lan" time="0.069">
   <properties/>
-  <testcase name="test" classname="com.mindex.challenge.DataBootstrapTest" time="0.046"/>
-  <system-out><![CDATA[2025-01-28T11:42:01.486-06:00  INFO 21244 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.mindex.challenge.DataBootstrapTest]: DataBootstrapTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-01-28T11:42:01.488-06:00  INFO 21244 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.mindex.challenge.ChallengeApplication for test class com.mindex.challenge.DataBootstrapTest
+  <testcase name="test" classname="com.mindex.challenge.DataBootstrapTest" time="0.069"/>
+  <system-out><![CDATA[2025-01-28T16:22:02.259-06:00  INFO 29458 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.mindex.challenge.DataBootstrapTest]: DataBootstrapTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-01-28T16:22:02.261-06:00  INFO 29458 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.mindex.challenge.ChallengeApplication for test class com.mindex.challenge.DataBootstrapTest
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

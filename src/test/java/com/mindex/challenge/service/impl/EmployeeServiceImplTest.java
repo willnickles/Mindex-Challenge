@@ -15,6 +15,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.Collections;
+
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -80,7 +87,7 @@ public class EmployeeServiceImplTest {
         assertEmployeeEquivalence(readEmployee, updatedEmployee);
     }
     @Test
-    public void testReportingStructure() {
+    public void testReportingStructure_0Reports() {
         // Create a single employee with no direct reports
         Employee manager = new Employee();
         manager.setFirstName("Alice");
@@ -112,6 +119,52 @@ public class EmployeeServiceImplTest {
 
         // Since there are no direct reports, numberOfReports should be 0
         assertEquals(0, reportingStructure.getNumberOfReports());
+    }
+    @Test
+    public void testReportingStructure_OneDirectReport() {
+        // Create the direct report employee
+        Employee directReport = new Employee();
+        directReport.setFirstName("Jane");
+        directReport.setLastName("Smith");
+        directReport.setDepartment("Engineering");
+        directReport.setPosition("Developer");
+
+        // Persist the direct report employee
+        Employee createdDirectReport = restTemplate.postForEntity(employeeUrl, directReport, Employee.class).getBody();
+        assertNotNull(createdDirectReport);
+        assertNotNull(createdDirectReport.getEmployeeId());
+
+        // Create the manager employee and assign the direct report
+        Employee manager = new Employee();
+        manager.setFirstName("John");
+        manager.setLastName("Doe");
+        manager.setDepartment("Engineering");
+        manager.setPosition("Manager");
+        manager.setDirectReports(Collections.singletonList(createdDirectReport));
+
+        // Persist the manager employee
+        Employee createdManager = restTemplate.postForEntity(employeeUrl, manager, Employee.class).getBody();
+        assertNotNull(createdManager);
+        assertNotNull(createdManager.getEmployeeId());
+
+        // Fetch the created manager to check persistence
+        Employee fetchedManager = restTemplate.getForEntity(employeeIdUrl, Employee.class, createdManager.getEmployeeId()).getBody();
+        assertNotNull(fetchedManager);
+        assertEquals(createdManager.getEmployeeId(), fetchedManager.getEmployeeId());
+
+        // Call the reporting structure endpoint
+        ReportingStructure reportingStructure = restTemplate.getForEntity(
+                reportingStructureUrl,
+                ReportingStructure.class,
+                createdManager.getEmployeeId()).getBody();
+
+        // Validate the response
+        assertNotNull(reportingStructure);
+        assertNotNull(reportingStructure.getEmployee());
+        assertEquals(createdManager.getEmployeeId(), reportingStructure.getEmployee().getEmployeeId());
+
+        // Since there is one direct report, numberOfReports should be 1
+        assertEquals(1, reportingStructure.getNumberOfReports());
     }
 
 

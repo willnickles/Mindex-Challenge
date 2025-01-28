@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.mindex.challenge.service.impl.CompensationServiceImplTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-01-28T17:42:01" hostname="Wills-MacBook-Pro-96.local" time="0.018">
+<testsuite name="com.mindex.challenge.service.impl.CompensationServiceImplTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-01-28T22:22:02" hostname="Wills-MBP-96.lan" time="0.046">
   <properties/>
-  <testcase name="testCreateReadCompensation" classname="com.mindex.challenge.service.impl.CompensationServiceImplTest" time="0.018"/>
-  <system-out><![CDATA[2025-01-28T11:42:01.538-06:00  INFO 21244 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.mindex.challenge.service.impl.CompensationServiceImplTest]: CompensationServiceImplTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-01-28T11:42:01.545-06:00  INFO 21244 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.mindex.challenge.ChallengeApplication for test class com.mindex.challenge.service.impl.CompensationServiceImplTest
-2025-01-28T11:42:01.548-06:00 DEBUG 21244 --- [    Test worker] c.m.c.s.impl.CompensationServiceImpl     : Creating compensation [com.mindex.challenge.data.Compensation@45abbd24]
-2025-01-28T11:42:01.555-06:00  INFO 21244 --- [-server-worker3] d.b.mongo.backend.AbstractMongoDatabase  : adding unique _id index for collection compensation
-2025-01-28T11:42:01.556-06:00  INFO 21244 --- [-server-worker3] d.b.mongo.backend.AbstractMongoDatabase  : created collection test.compensation
-2025-01-28T11:42:01.557-06:00 DEBUG 21244 --- [    Test worker] c.m.c.s.impl.CompensationServiceImpl     : Reading compensation for employeeId [16a596ae-edd3-4847-99fe-c4518e82c86f]
+  <testcase name="testCreateReadCompensation_HappyPath" classname="com.mindex.challenge.service.impl.CompensationServiceImplTest" time="0.028"/>
+  <testcase name="testCreateCompensation_NullEmployeeId" classname="com.mindex.challenge.service.impl.CompensationServiceImplTest" time="0.003"/>
+  <testcase name="testCreateCompensation_AlreadyExists" classname="com.mindex.challenge.service.impl.CompensationServiceImplTest" time="0.013"/>
+  <system-out><![CDATA[2025-01-28T16:22:02.334-06:00  INFO 29458 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.mindex.challenge.service.impl.CompensationServiceImplTest]: CompensationServiceImplTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-01-28T16:22:02.348-06:00  INFO 29458 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.mindex.challenge.ChallengeApplication for test class com.mindex.challenge.service.impl.CompensationServiceImplTest
+2025-01-28T16:22:02.352-06:00 DEBUG 29458 --- [    Test worker] c.m.c.s.impl.CompensationServiceImpl     : Creating compensation [com.mindex.challenge.data.Compensation@39685204]
+2025-01-28T16:22:02.367-06:00  INFO 29458 --- [-server-worker3] d.b.mongo.backend.AbstractMongoDatabase  : adding unique _id index for collection compensation
+2025-01-28T16:22:02.368-06:00  INFO 29458 --- [-server-worker3] d.b.mongo.backend.AbstractMongoDatabase  : created collection test.compensation
+2025-01-28T16:22:02.369-06:00 DEBUG 29458 --- [    Test worker] c.m.c.s.impl.CompensationServiceImpl     : Reading compensation for employeeId [16a596ae-edd3-4847-99fe-c4518e82c86f]
+2025-01-28T16:22:02.381-06:00 DEBUG 29458 --- [    Test worker] c.m.c.s.impl.CompensationServiceImpl     : Creating compensation [com.mindex.challenge.data.Compensation@7c56c911]
+2025-01-28T16:22:02.385-06:00 DEBUG 29458 --- [    Test worker] c.m.c.s.impl.CompensationServiceImpl     : Creating compensation [com.mindex.challenge.data.Compensation@418d1c03]
+2025-01-28T16:22:02.392-06:00 DEBUG 29458 --- [    Test worker] c.m.c.s.impl.CompensationServiceImpl     : Creating compensation [com.mindex.challenge.data.Compensation@395197cb]
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

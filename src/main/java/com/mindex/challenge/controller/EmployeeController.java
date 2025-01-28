@@ -40,6 +40,12 @@ public class EmployeeController {
         employee.setEmployeeId(id);
         return employeeService.update(employee);
     }
+    /**
+     * Retrieves the reporting structure for an employee by their ID.
+     *
+     * @param id The ID of the employee for whom the reporting structure is requested.
+     * @return A ReportingStructure object containing the employee's details and the total number of reports (direct and indirect).
+     */
 
     @GetMapping("/employee/{id}/reporting-structure")
     public ReportingStructure getReportingStructure(@PathVariable String id){

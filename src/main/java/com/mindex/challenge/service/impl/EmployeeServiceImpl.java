@@ -49,6 +49,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         return employeeRepository.save(employee);
     }
+
+     /**
+     * Calculates the reporting structure for an employee by their ID.
+     * 
+     * @param id The ID of the employee whose reporting structure is being calculated.
+     * @return A ReportingStructure object containing the employee's details and the total number of direct and indirect reports.
+     */
     @Override
     public ReportingStructure getReportingStructure(String id){
         //Adding a log for reporting purposes
@@ -59,7 +66,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         return new ReportingStructure(employee, numberOfReports);
     }
-    // Iterative approach using a queue 
+
+    /**
+     * Calculates the total number of reports (direct and indirect) for an employee using an iterative approach.
+     * 
+     * @param employee The employee for whom the reports are being calculated.
+     * @return The total number of direct and indirect reports for the given employee.
+     */
     private int calculateTotalReportsIteratively(Employee employee) {
         if (employee.getDirectReports() == null || employee.getDirectReports().isEmpty()) {
             return 0;
@@ -77,7 +90,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         while (!queue.isEmpty()) {
             Employee current = queue.poll();
             totalReports++;
-
+         // If the current employee has direct reports, process them
             if (current.getDirectReports() != null) {
                 for (Employee report : current.getDirectReports()) {
                     Employee fullReport = employeeRepository.findByEmployeeId(report.getEmployeeId());

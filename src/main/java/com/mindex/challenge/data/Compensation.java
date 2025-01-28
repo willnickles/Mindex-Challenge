@@ -1,42 +1,39 @@
 package com.mindex.challenge.data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Compensation {
-    private String employeeId; // Links compensation to a specific employee
-    private double salary;
-    private Date effectiveDate;
+	private String employeeId;
+	private double salary;
+	private LocalDate effectiveDate;
+	
+	public Compensation() {
+		
+	}
 
-    public Compensation() {
-    }
+	public String getEmployeeId() {
+		return employeeId;
+	}
 
-    public Compensation(String employeeId, double salary, Date effectiveDate) {
-        this.employeeId = employeeId;
-        this.salary = salary;
-        this.effectiveDate = effectiveDate;
-    }
+	public void setEmployeeId(String employeeId) {
+		this.employeeId = employeeId;
+	}
 
-    public String getEmployeeId() {
-        return employeeId;
-    }
+	public double getSalary() {
+		return salary;
+	}
 
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
-    }
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
 
-    public double getSalary() {
-        return salary;
-    }
+	public LocalDate getEffectiveDate() {
+		return effectiveDate;
+	}
 
-    public void setSalary(double salary) {
-        this.salary = salary;
-    }
-
-    public Date getEffectiveDate() {
-        return effectiveDate;
-    }
-
-    public void setEffectiveDate(Date effectiveDate) {
-        this.effectiveDate = effectiveDate;
-    }
+	public void setEffectiveDate(LocalDate effectiveDate) {
+		this.effectiveDate = effectiveDate;
+	}
+	
+	
 }
